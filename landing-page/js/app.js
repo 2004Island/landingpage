@@ -44,7 +44,7 @@ function viewportdetect (tag){
  * 
 */
 
-// build the nav
+// build the nav and add onclick command to scroll to corresponding section
 function createnavbar(){
     for (let i=0; i < sections.length; i++){
         navlistitem = document.createElement('li');
@@ -71,7 +71,10 @@ function activator(){
 
 // Scroll to anchor ID using scrollTO event
 function scrollto(num) {
-    sections[num].scrollIntoView({behavior: 'smooth'})
+    sections[num].scrollIntoView({behavior: 'smooth'});
+    document.addEventListener('scroll', function(event) {
+        event.preventDefault()
+    })
   } 
 
 /**
@@ -82,7 +85,6 @@ function scrollto(num) {
 
 // Build menu 
 createnavbar();
-// Scroll to section on link click
 
 // Set sections as active
 document.addEventListener('scroll', function(){
