@@ -34,7 +34,8 @@ const listelem = document.querySelectorAll('li');
 function viewportdetect (tag){
     const area = tag.getBoundingClientRect();
     return (
-        area.top >= 50
+        area.top >= 50 && 
+        area.bottom <= (window.innerHeight + 50 || document.documentElement.clientHeight)
     );
 };
 
@@ -60,11 +61,11 @@ function activator(){
         const main = section.querySelector('h2');
         if (viewportdetect(section)){
             main.style.cssText = 'border-bottom: 3px solid white';
-            section.className = "your-active-class";
+            section.classList.add("your-active-class");
         }
         else {
             main.style.cssText = 'border-bottom: 1px solid white';
-            section.className = "inactive-class";
+            section.classList.remove("your-active-class");
         }
     }
 }
