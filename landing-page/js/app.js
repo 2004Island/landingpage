@@ -34,8 +34,8 @@ const listelem = document.querySelectorAll('li');
 function viewportdetect (tag){
     const area = tag.getBoundingClientRect();
     return (
-        area.top >= 50 && 
-        area.bottom <= (window.innerHeight + 50 || document.documentElement.clientHeight)
+        area.top >= 0 && 
+        area.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     );
 };
 
@@ -44,7 +44,6 @@ function viewportdetect (tag){
  * Begin Main Functions
  * 
 */
-
 // build the nav and add onclick command to scroll to corresponding section
 function createnavbar(){
     for (let i=0; i < sections.length; i++){
@@ -57,17 +56,20 @@ function createnavbar(){
 }
 // Add class 'active' to section when near top of viewport and change css rule
 function activator(){
-    for (const section of sections){
-        const main = section.querySelector('h2');
-        if (viewportdetect(section)){
+    const navbar = document.querySelectorAll('.menu__link')
+    for (let i=0; i < sections.length; i++){
+        const main = sections[i].querySelector('h2');
+        if (viewportdetect(sections[i])){
             main.style.cssText = 'border-bottom: 3px solid white';
-            section.classList.add("your-active-class");
+            sections[i].classList.add("your-active-class");
+            navbar[i].style.cssText = 'background: #333; color: #fff';
         }
         else {
             main.style.cssText = 'border-bottom: 1px solid white';
-            section.classList.remove("your-active-class");
+            sections[i].classList.remove("your-active-class");
+            navbar[i].style.cssText = 'background: white; color: black';
         }
-    }
+     }
 }
 
 // Scroll to anchor ID using scrollTO event
